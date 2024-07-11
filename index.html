@@ -65,7 +65,7 @@
             display: none;
             margin-top: 20px;
         }
-        #linkOptions button {
+        .copyButton {
             display: inline-block;
             margin: 10px;
             padding: 10px 25px;
@@ -78,7 +78,24 @@
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        #linkOptions button:hover {
+        .copyButton:hover {
+            background-color: #009acd;
+            transform: scale(1.05);
+        }
+        #generateQRCodeButton {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 25px;
+            font-size: 16px;
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #generateQRCodeButton:hover {
             background-color: #009acd;
             transform: scale(1.05);
         }
@@ -113,7 +130,7 @@
             margin-top: 20px;
         }
 
-
+        /* Footer styles */
         .footer {
             position: fixed;
             bottom: 20px;
@@ -158,10 +175,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
-        #backgroundSelection label input {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -172,19 +185,19 @@
     </div>
     <button id="uploadButton">Upload</button>
     <div id="linkOptions">
-        <button id="getLink">Get Link</button>
-        <button id="generateQRCodeButton">Generate QR Code</button>
+        <button id="getLink" class="copyButton" onclick="copyText('https://tinyurl.com/bddbwrrt')">Copy TinyURL</button>
+        <button id="generateQRCodeButton" class="copyButton">Generate QR Code</button>
     </div>
     <p id="result"></p>
-    <button id="copyButton">Copy to Clipboard</button>
+    <button id="copyButton" class="copyButton">Copy to Clipboard</button>
     <div id="qrCode"></div>
 
     <div class="footer">
         <div class="footer-text">Made by Marvin with Much Love</div>
-        <img class="footer-heart" src="https://www.clipartmax.com/png/middle/4-44236_red-heart-with-transparent-background.png" alt="Heart">
+        <img class="footer-heart" src="https://cdn.pixabay.com/photo/2017/06/24/20/27/heart-2438746_1280.png" alt="Heart">
     </div>
 
-
+    <!-- Background Selection -->
     <div id="backgroundSelection">
         <label>
             <input type="radio" name="background" value="1" checked>
