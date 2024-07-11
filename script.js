@@ -1,4 +1,3 @@
-
 document.getElementById('uploadButton').addEventListener('click', () => {
     const imageInput = document.getElementById('imageInput');
     if (imageInput.files.length === 0) {
@@ -7,11 +6,10 @@ document.getElementById('uploadButton').addEventListener('click', () => {
     }
 
     const imageFile = imageInput.files[0];
-    const imgurClientId = 'feaa817d1a27759'; 
+    const imgurClientId = 'feaa817d1a27759'; // Replace this with your actual Imgur Client-ID
 
     const formDataImgur = new FormData();
     formDataImgur.append('image', imageFile);
-
 
     fetch('https://api.imgur.com/3/upload', {
         method: 'POST',
@@ -60,20 +58,11 @@ function showResult(url) {
 }
 
 function shortenUrl(imgurUrl) {
-    fetch(`https://api.tinyurl.com/create?url=${encodeURIComponent(imgurUrl)}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O' 
-        },
-        body: JSON.stringify({
-            url: imgurUrl
-        })
-    })
+    fetch(`https://is.gd/create.php?format=json&url=${encodeURIComponent(imgurUrl)}`)
     .then(response => response.json())
     .then(data => {
-        if (data.data) {
-            const shortUrl = data.data.tiny_url;
+        if (data.shorturl) {
+            const shortUrl = data.shorturl;
             showResult(shortUrl);
         } else {
             document.getElementById('result').innerText = 'Failed to shorten the URL.';
