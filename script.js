@@ -43,39 +43,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function showResult(url) {
-        const resultElement = document.getElementById('result');
-        resultElement.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
-        resultElement.style.display = 'block';
+      const qrCodeElement = document.getElementById('qrCode');
+      qrCodeElement.innerHTML = ''; // Clear previous QR code if any
+      qrCodeElement.style.display = 'none'; // Hide QR code element
 
-        const copyButton = document.getElementById('copyButton');
-        copyButton.style.display = 'block';
-        copyButton.onclick = () => {
-            navigator.clipboard.writeText(url)
-                .then(() => {
-                    alert('Link copied to clipboard!');
-                })
-                .catch(err => {
-                    console.error('Could not copy text: ', err);
-                });
-        };
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
+      resultElement.style.display = 'block';
 
-
+      const copyButton = document.getElementById('copyButton');
+      copyButton.style.display = 'block';
+      copyButton.onclick = () => {
+          navigator.clipboard.writeText(url)
+              .then(() => {
+                  alert('Link copied to clipboard!');
+              })
+              .catch(err => {
+                  console.error('Could not copy text: ', err);
+              });
+      };
     }
+
 
     function generateQRCode(url) {
-        const qrCodeElement = document.getElementById('qrCode');
-        qrCodeElement.innerHTML = ''; // Clear previous QR code if any
+      const qrCodeElement = document.getElementById('qrCode');
+      qrCodeElement.innerHTML = ''; // Clear previous QR code if any
 
-        const qrImg = document.createElement('img');
-        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
-        qrImg.alt = 'QR Code';
+      const qrImg = document.createElement('img');
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
+      qrImg.alt = 'QR Code';
 
-        qrCodeElement.appendChild(qrImg);
-        qrCodeElement.style.display = 'block';
+      qrCodeElement.appendChild(qrImg);
+      qrCodeElement.style.display = 'block';
 
-        // Show the result and copy button next to QR code
-        showResult(url);
+      // Hide the result and copy button
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('copyButton').style.display = 'none';
     }
+
 
     // Additional event listeners and setup can go here if needed
 });
