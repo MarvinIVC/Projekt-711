@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Function to change background image based on selection
+
     function changeBackground(imageUrl) {
         document.body.style.backgroundImage = `url('${imageUrl}')`;
     }
 
-    // Event listener for background selection
+
     const backgroundRadios = document.querySelectorAll('#backgroundSelection input[type="radio"]');
     backgroundRadios.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event listener for upload button
+
     document.getElementById('uploadButton').addEventListener('click', () => {
         const imageInput = document.getElementById('imageInput');
         if (imageInput.files.length === 0) {
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const imgurUrl = data.data.link;
                 document.getElementById('linkOptions').style.display = 'flex'; // Display link options
                 document.getElementById('getLink').onclick = () => {
-                    showResult(imgurUrl);
+                    shortenUrl(imgurUrl);
                 };
                 document.getElementById('generateQRCodeButton').onclick = () => {
                     generateQRCode(imgurUrl);
@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Function to show result
+
     function showResult(url) {
         const qrCodeElement = document.getElementById('qrCode');
-        qrCodeElement.innerHTML = ''; // Clear previous QR code if any
-        qrCodeElement.style.display = 'none'; // Hide QR code element
+        qrCodeElement.innerHTML = ''; 
+        qrCodeElement.style.display = 'none';
 
         const resultElement = document.getElementById('result');
         resultElement.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
@@ -102,7 +102,36 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Function to generate QR code
+
+    function shortenUrl(imgurUrl) {
+        fetch(`https://api.tinyurl.com/create?url=${encodeURIComponent(imgurUrl)}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O' 
+            },
+            body: JSON.stringify({
+                url: imgurUrl
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.data) {
+                const shortUrl = data.data.tiny_url;
+                showResult(shortUrl);
+            } else {
+                document.getElementById('result').innerText = 'Failed to shorten the URL.';
+                document.getElementById('result').style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('result').innerText = 'Failed to shorten the URL.';
+            document.getElementById('result').style.display = 'block';
+        });
+    }
+
+
     function generateQRCode(url) {
         const qrCodeElement = document.getElementById('qrCode');
         qrCodeElement.innerHTML = ''; // Clear previous QR code if any
@@ -114,12 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
         qrCodeElement.appendChild(qrImg);
         qrCodeElement.style.display = 'block';
 
-        // Hide the result and copy button
         document.getElementById('result').style.display = 'none';
         document.getElementById('copyButton').style.display = 'none';
     }
 
-    // Additional event listeners and setup can go here if needed
 });
 
 
