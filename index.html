@@ -133,6 +133,35 @@
             width: 20px;
             height: 20px;
         }
+
+        /* Background Selection */
+        #backgroundSelection {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        #backgroundSelection label {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        #backgroundSelection label img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #backgroundSelection label input {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -153,6 +182,34 @@
     <div class="footer">
         <div class="footer-text">Made by Marvin with Much Love</div>
         <img class="footer-heart" src="https://www.clipartmax.com/png/middle/4-44236_red-heart-with-transparent-background.png" alt="Heart">
+    </div>
+
+
+    <div id="backgroundSelection">
+        <label>
+            <input type="radio" name="background" value="1" checked>
+            <img src="https://files.123freevectors.com/wp-content/original/131396-light-color-polygonal-abstract-background-vector-illustration.jpg" alt="Background 1">
+        </label>
+        <label>
+            <input type="radio" name="background" value="2">
+            <img src="https://th.bing.com/th/id/R.435ebd9442f6ca449b44699a2a9a6acd?rik=fYMPzB%2ffp1EczA&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f1%2fa%2f8%2f136021.jpg&ehk=MAPonR9qka0eiZRvyC%2b08vGWIdpkEibRMFYdtK6xt8c%3d&risl=&pid=ImgRaw&r=0" alt="Background 2">
+        </label>
+        <label>
+            <input type="radio" name="background" value="3">
+            <img src="https://www.teahub.io/photos/full/44-440307_light-colors-geometric-pattern-abstract-wallpaper-abstract-wallpaper.jpg" alt="Background 3">
+        </label>
+        <label>
+            <input type="radio" name="background" value="4">
+            <img src="https://img.freepik.com/free-photo/soft-vintage-gradient-blur-background-with-pastel-colored-well-use-as-studio-room-product-presentation-banner_1258-71429.jpg" alt="Background 4">
+        </label>
+        <label>
+            <input type="radio" name="background" value="5">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/008/058/793/small_2x/abstract-blur-with-bokeh-light-for-background-usage-vector.jpg" alt="Background 5">
+        </label>
+        <label>
+            <input type="radio" name="background" value="6">
+            <img src="https://getwallpapers.com/wallpaper/full/e/c/e/455056.jpg" alt="Background 6">
+        </label>
     </div>
 
     <script src="script.js"></script>
