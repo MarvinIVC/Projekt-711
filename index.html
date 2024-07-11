@@ -66,8 +66,8 @@
             margin-top: 20px;
         }
         #linkOptions button {
-            display: block;
-            margin: 10px auto;
+            display: inline-block;
+            margin: 10px;
             padding: 10px 25px;
             font-size: 16px;
             background-color: #00bfff;
@@ -108,8 +108,12 @@
             background-color: #009acd;
             transform: scale(1.05);
         }
+        #qrCode {
+            display: none;
+            margin-top: 20px;
+        }
 
-
+        /* Footer styles */
         .footer {
             position: fixed;
             bottom: 20px;
@@ -117,12 +121,12 @@
             display: flex;
             align-items: center;
             font-size: 14px;
-            color: black; 
+            color: black;
         }
 
         .footer-text {
             margin-right: 10px;
-            font-weight: bold; 
+            font-weight: bold;
         }
 
         .footer-heart {
@@ -139,12 +143,12 @@
     </div>
     <button id="uploadButton">Upload</button>
     <div id="linkOptions">
-        <button id="getImgurLink">Get Imgur Link</button>
-        <button id="getShortLink">Get Shortened Link</button>
+        <button id="getLink">Get Link</button>
+        <button id="generateQRCodeButton">Generate QR Code</button>
     </div>
     <p id="result"></p>
     <button id="copyButton">Copy to Clipboard</button>
-
+    <div id="qrCode"></div>
 
     <div class="footer">
         <div class="footer-text">Made by Marvin with Much Love</div>
