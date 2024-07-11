@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvin's Image to URL Service :)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+        }
+        #dropArea {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            transition: border-color 0.3s, background-color 0.3s;
+            width: 300px;
+            background-color: #fff;
+        }
+        #dropArea.hover {
+            border-color: #333;
+        }
+        #dropArea.active {
+            border-color: #00bfff;
+            background-color: #f0f8ff;
+        }
+        #uploadButton {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #uploadButton:hover {
+            background-color: #009acd;
+        }
+        #imgurResult, #shortUrlResult {
+            text-align: center;
+        }
+        #copyImgurButton, #shortenButton, #copyShortUrlButton {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #copyImgurButton:hover, #shortenButton:hover, #copyShortUrlButton:hover {
+            background-color: #009acd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Marvin's Image to URL Service :)</h1>
+    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+    <div id="dropArea">
+        <p>Drag & drop an image here or click to select a file</p>
+    </div>
+    <button id="uploadButton">Upload</button>
+    <p id="imgurResult"></p>
+    <button id="copyImgurButton" style="display: none;">Copy Imgur URL to Clipboard</button>
+    <button id="shortenButton" style="display: none;">Shorten URL</button>
+    <p id="shortUrlResult"></p>
+    <button id="copyShortUrlButton" style="display: none;">Copy Shortened URL to Clipboard</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
