@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const imageFile = imageInput.files[0];
-        const imgurClientId = 'feaa817d1a27759'; // Replace with your Imgur Client ID
+        const imgurClientId = 'feaa817d1a27759'; 
 
         const formDataImgur = new FormData();
         formDataImgur.append('image', imageFile);
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.success) {
                 const imgurUrl = data.data.link;
-                document.getElementById('linkOptions').style.display = 'flex'; // Display link options
+                document.getElementById('linkOptions').style.display = 'flex'; 
                 document.getElementById('getLink').onclick = () => {
                     shortenUrlTiny(imgurUrl); // Default to tinyurl
                     shortenUrlIsGd(imgurUrl); // Also shorten with is.gd
@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showResult(url1, url2) {
         const qrCodeElement = document.getElementById('qrCode');
-        qrCodeElement.innerHTML = ''; // Clear previous QR code if any
-        qrCodeElement.style.display = 'none'; // Hide QR code element
+        qrCodeElement.innerHTML = ''; 
+        qrCodeElement.style.display = 'none';
 
         const resultElement = document.getElementById('result');
         resultElement.innerHTML = `
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O' // Replace with your TinyURL API token
+                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O' 
             },
             body: JSON.stringify({
                 url: imgurUrl
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         qrCodeElement.appendChild(qrImg);
         qrCodeElement.style.display = 'block';
 
-
+        // Hide the result and copy buttons
         document.getElementById('result').style.display = 'none';
         document.getElementById('copyTinyButton').style.display = 'none';
         document.getElementById('copyIsGdButton').style.display = 'none';
