@@ -130,7 +130,6 @@
             margin-top: 20px;
         }
 
-
         .footer {
             position: fixed;
             bottom: 20px;
@@ -151,16 +150,39 @@
             height: 20px;
         }
 
+        #backgroundSelectionToggle {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #backgroundSelectionToggle:hover {
+            background-color: #009acd;
+            transform: scale(1.1);
+        }
+
         #backgroundSelection {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 5px;
-            border-radius: 5px;
+            bottom: 80px;
+            left: 20px;
+            display: none;
+            flex-direction: row;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         #backgroundSelection label {
@@ -173,6 +195,24 @@
             height: 50px;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -196,7 +236,8 @@
         <img class="footer-heart" src="https://cdn.pixabay.com/photo/2017/06/24/20/27/heart-2438746_1280.png" alt="Heart">
     </div>
 
-    <!-- Background Selection -->
+    <button id="backgroundSelectionToggle">BG</button>
+
     <div id="backgroundSelection">
         <label>
             <input type="radio" name="background" value="1" checked>
@@ -224,6 +265,48 @@
         </label>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const toggleButton = document.getElementById('backgroundSelectionToggle');
+        const backgroundSelection = document.getElementById('backgroundSelection');
+
+        toggleButton.addEventListener('click', () => {
+            if (backgroundSelection.style.display === 'none' || backgroundSelection.style.display === '') {
+                backgroundSelection.style.display = 'flex';
+                backgroundSelection.style.animation = 'fadeIn 0.5s';
+            } else {
+                backgroundSelection.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => {
+                    backgroundSelection.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        const backgroundRadios = document.querySelectorAll('#backgroundSelection input[name="background"]');
+        backgroundRadios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                const value = event.target.value;
+                switch (value) {
+                    case '1':
+                        document.body.style.backgroundImage = "url('https://files.123freevectors.com/wp-content/original/131396-light-color-polygonal-abstract-background-vector-illustration.jpg')";
+                        break;
+                    case '2':
+                        document.body.style.backgroundImage = "url('https://th.bing.com/th/id/R.435ebd9442f6ca449b44699a2a9a6acd?rik=fYMPzB%2ffp1EczA&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f1%2fa%2f8%2f136021.jpg&ehk=MAPonR9qka0eiZRvyC%2b08vGWIdpkEibRMFYdtK6xt8c%3d&risl=&pid=ImgRaw&r=0')";
+                        break;
+                    case '3':
+                        document.body.style.backgroundImage = "url('https://www.teahub.io/photos/full/44-440307_light-colors-geometric-pattern-abstract-wallpaper-abstract-wallpaper.jpg')";
+                        break;
+                    case '4':
+                        document.body.style.backgroundImage = "url('https://img.freepik.com/free-photo/soft-vintage-gradient-blur-background-with-pastel-colored-well-use-as-studio-room-product-presentation-banner_1258-71429.jpg')";
+                        break;
+                    case '5':
+                        document.body.style.backgroundImage = "url('https://static.vecteezy.com/system/resources/thumbnails/008/058/793/small_2x/abstract-blur-with-bokeh-light-for-background-usage-vector.jpg')";
+                        break;
+                    case '6':
+                        document.body.style.backgroundImage = "url('https://getwallpapers.com/wallpaper/full/e/c/e/455056.jpg')";
+                        break;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
