@@ -108,6 +108,27 @@
             background-color: #009acd;
             transform: scale(1.05);
         }
+
+
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: black; 
+        }
+
+        .footer-text {
+            margin-right: 10px;
+            font-weight: bold; 
+        }
+
+        .footer-heart {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
@@ -123,6 +144,12 @@
     </div>
     <p id="result"></p>
     <button id="copyButton">Copy to Clipboard</button>
+
+
+    <div class="footer">
+        <div class="footer-text">Made by Marvin with Much Love</div>
+        <img class="footer-heart" src="https://www.clipartmax.com/png/middle/4-44236_red-heart-with-transparent-background.png" alt="Heart">
+    </div>
 
     <script src="script.js"></script>
 </body>
