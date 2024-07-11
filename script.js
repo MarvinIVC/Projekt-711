@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     // Function to change background image based on selection
     function changeBackground(imageUrl) {
         document.body.style.backgroundImage = `url('${imageUrl}')`;
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundRadios = document.querySelectorAll('#backgroundSelection input[type="radio"]');
     backgroundRadios.forEach(radio => {
         radio.addEventListener('change', () => {
-            const selectedBackground = document.querySelector(`input[name="background"]:checked`).value;
+            const selectedBackground = document.querySelector('input[name="background"]:checked').value;
             switch (selectedBackground) {
                 case '1':
                     changeBackground('https://files.123freevectors.com/wp-content/original/131396-light-color-polygonal-abstract-background-vector-illustration.jpg');
@@ -27,13 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case '6':
                     changeBackground('https://getwallpapers.com/wallpaper/full/e/c/e/455056.jpg');
+                    break;
                 default:
                     break;
             }
         });
     });
 
-document.addEventListener('DOMContentLoaded', () => {
+    // Event listener for upload button
     document.getElementById('uploadButton').addEventListener('click', () => {
         const imageInput = document.getElementById('imageInput');
         if (imageInput.files.length === 0) {
@@ -77,48 +79,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Function to show result
     function showResult(url) {
-      const qrCodeElement = document.getElementById('qrCode');
-      qrCodeElement.innerHTML = ''; // Clear previous QR code if any
-      qrCodeElement.style.display = 'none'; // Hide QR code element
+        const qrCodeElement = document.getElementById('qrCode');
+        qrCodeElement.innerHTML = ''; // Clear previous QR code if any
+        qrCodeElement.style.display = 'none'; // Hide QR code element
 
-      const resultElement = document.getElementById('result');
-      resultElement.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
-      resultElement.style.display = 'block';
+        const resultElement = document.getElementById('result');
+        resultElement.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
+        resultElement.style.display = 'block';
 
-      const copyButton = document.getElementById('copyButton');
-      copyButton.style.display = 'block';
-      copyButton.onclick = () => {
-          navigator.clipboard.writeText(url)
-              .then(() => {
-                  alert('Link copied to clipboard!');
-              })
-              .catch(err => {
-                  console.error('Could not copy text: ', err);
-              });
-      };
+        const copyButton = document.getElementById('copyButton');
+        copyButton.style.display = 'block';
+        copyButton.onclick = () => {
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert('Link copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
+        };
     }
 
-
+    // Function to generate QR code
     function generateQRCode(url) {
-      const qrCodeElement = document.getElementById('qrCode');
-      qrCodeElement.innerHTML = ''; // Clear previous QR code if any
+        const qrCodeElement = document.getElementById('qrCode');
+        qrCodeElement.innerHTML = ''; // Clear previous QR code if any
 
-      const qrImg = document.createElement('img');
-      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
-      qrImg.alt = 'QR Code';
+        const qrImg = document.createElement('img');
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
+        qrImg.alt = 'QR Code';
 
-      qrCodeElement.appendChild(qrImg);
-      qrCodeElement.style.display = 'block';
+        qrCodeElement.appendChild(qrImg);
+        qrCodeElement.style.display = 'block';
 
-      // Hide the result and copy button
-      document.getElementById('result').style.display = 'none';
-      document.getElementById('copyButton').style.display = 'none';
+        // Hide the result and copy button
+        document.getElementById('result').style.display = 'none';
+        document.getElementById('copyButton').style.display = 'none';
     }
-
 
     // Additional event listeners and setup can go here if needed
 });
+
 
 
 document.getElementById('dropArea').addEventListener('click', () => {
@@ -152,6 +155,4 @@ document.getElementById('dropArea').addEventListener('drop', (event) => {
         document.getElementById('dropArea').classList.add('active');
         document.getElementById('dropArea').innerText = `File selected: ${files[0].name}`;
     }
-});
-
 });
