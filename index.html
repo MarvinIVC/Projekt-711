@@ -13,10 +13,16 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f5f5f5;
+            background-image: url('https://files.123freevectors.com/wp-content/original/131396-light-color-polygonal-abstract-background-vector-illustration.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            backdrop-filter: blur(5px); /* Optional: for better readability */
+            color: #333;
         }
         h1 {
             text-align: center;
+            color: black; /* Change text color to black for better visibility */
         }
         #dropArea {
             border: 2px dashed #ccc;
@@ -26,14 +32,14 @@
             margin-top: 20px;
             transition: border-color 0.3s, background-color 0.3s;
             width: 300px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
         }
         #dropArea.hover {
             border-color: #333;
         }
         #dropArea.active {
             border-color: #00bfff;
-            background-color: #f0f8ff;
+            background-color: rgba(240, 248, 255, 0.8); /* Semi-transparent background */
         }
         #uploadButton {
             display: block;
