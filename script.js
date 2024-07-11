@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
+    // Function to change background image based on selection
     function changeBackground(imageUrl) {
         document.body.style.backgroundImage = `url('${imageUrl}')`;
     }
 
-
+    // Event listener for background selection
     const backgroundRadios = document.querySelectorAll('#backgroundSelection input[type="radio"]');
     backgroundRadios.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
+    // Event listener for upload button
     document.getElementById('uploadButton').addEventListener('click', () => {
         const imageInput = document.getElementById('imageInput');
         if (imageInput.files.length === 0) {
@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const imgurUrl = data.data.link;
                 document.getElementById('linkOptions').style.display = 'flex'; // Display link options
                 document.getElementById('getLink').onclick = () => {
-                    shortenUrl(imgurUrl);
+                    shortenUrlTiny(imgurUrl); // Default to tinyurl
+                    shortenUrlIsGd(imgurUrl); // Also shorten with is.gd
                 };
                 document.getElementById('generateQRCodeButton').onclick = () => {
                     generateQRCode(imgurUrl);
@@ -79,36 +80,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
-    function showResult(url) {
+    // Function to show result
+    function showResult(url1, url2) {
         const qrCodeElement = document.getElementById('qrCode');
-        qrCodeElement.innerHTML = ''; 
-        qrCodeElement.style.display = 'none';
+        qrCodeElement.innerHTML = ''; // Clear previous QR code if any
+        qrCodeElement.style.display = 'none'; // Hide QR code element
 
         const resultElement = document.getElementById('result');
-        resultElement.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
+        resultElement.innerHTML = `
+            <div>
+                TinyURL: <a href="${url1}" target="_blank">${url1}</a>
+                <button class="copyButton" id="copyTinyButton">Copy TinyURL</button>
+            </div>
+            <div>
+                is.gd: <a href="${url2}" target="_blank">${url2}</a>
+                <button class="copyButton" id="copyIsGdButton">Copy is.gd</button>
+            </div>
+        `;
         resultElement.style.display = 'block';
 
-        const copyButton = document.getElementById('copyButton');
-        copyButton.style.display = 'block';
-        copyButton.onclick = () => {
-            navigator.clipboard.writeText(url)
-                .then(() => {
-                    alert('Link copied to clipboard!');
-                })
-                .catch(err => {
-                    console.error('Could not copy text: ', err);
-                });
+        // Copy buttons functionality
+        document.getElementById('copyTinyButton').onclick = () => {
+            copyToClipboard(url1);
+        };
+        document.getElementById('copyIsGdButton').onclick = () => {
+            copyToClipboard(url2);
         };
     }
 
-
-    function shortenUrl(imgurUrl) {
+    // Function to shorten URL with tinyurl
+    function shortenUrlTiny(imgurUrl) {
         fetch(`https://api.tinyurl.com/create?url=${encodeURIComponent(imgurUrl)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O' 
+                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O' // Replace with your TinyURL API token
             },
             body: JSON.stringify({
                 url: imgurUrl
@@ -117,21 +123,37 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.data) {
-                const shortUrl = data.data.tiny_url;
-                showResult(shortUrl);
+                const shortUrlTiny = data.data.tiny_url;
+                return shortUrlTiny;
             } else {
-                document.getElementById('result').innerText = 'Failed to shorten the URL.';
-                document.getElementById('result').style.display = 'block';
+                throw new Error('Failed to shorten the URL with TinyURL.');
             }
+        })
+        .then(shortUrlTiny => {
+            fetch(`https://is.gd/create.php?format=json&url=${encodeURIComponent(imgurUrl)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.shorturl) {
+                    const shortUrlIsGd = data.shorturl;
+                    showResult(shortUrlTiny, shortUrlIsGd);
+                } else {
+                    throw new Error('Failed to shorten the URL with is.gd.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'Failed to shorten the URL with is.gd.';
+                document.getElementById('result').style.display = 'block';
+            });
         })
         .catch(error => {
             console.error('Error:', error);
-            document.getElementById('result').innerText = 'Failed to shorten the URL.';
+            document.getElementById('result').innerText = 'Failed to shorten the URL with TinyURL.';
             document.getElementById('result').style.display = 'block';
         });
     }
 
-
+    // Function to generate QR code
     function generateQRCode(url) {
         const qrCodeElement = document.getElementById('qrCode');
         qrCodeElement.innerHTML = ''; // Clear previous QR code if any
@@ -143,18 +165,32 @@ document.addEventListener('DOMContentLoaded', () => {
         qrCodeElement.appendChild(qrImg);
         qrCodeElement.style.display = 'block';
 
+        // Hide the result and copy buttons
         document.getElementById('result').style.display = 'none';
-        document.getElementById('copyButton').style.display = 'none';
+        document.getElementById('copyTinyButton').style.display = 'none';
+        document.getElementById('copyIsGdButton').style.display = 'none';
     }
 
+    // Function to copy text to clipboard
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert('Link copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+    }
+
+    // Additional event listeners and setup can go here if needed
 });
 
-
-
+// Event listener for file input selection via drop area
 document.getElementById('dropArea').addEventListener('click', () => {
     document.getElementById('imageInput').click();
 });
 
+// Event listener for file input change
 document.getElementById('imageInput').addEventListener('change', (event) => {
     const files = event.target.files;
     if (files.length > 0) {
@@ -163,6 +199,7 @@ document.getElementById('imageInput').addEventListener('change', (event) => {
     }
 });
 
+// Event listeners for drag and drop functionality
 document.getElementById('dropArea').addEventListener('dragover', (event) => {
     event.preventDefault();
     document.getElementById('dropArea').classList.add('hover');
