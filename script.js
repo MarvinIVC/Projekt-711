@@ -1,4 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    function changeBackground(imageUrl) {
+        document.body.style.backgroundImage = `url('${imageUrl}')`;
+    }
+
+
+    const backgroundRadios = document.querySelectorAll('#backgroundSelection input[type="radio"]');
+    backgroundRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            const selectedBackground = document.querySelector(`input[name="background"]:checked`).value;
+            switch (selectedBackground) {
+                case '1':
+                    changeBackground('https://files.123freevectors.com/wp-content/original/131396-light-color-polygonal-abstract-background-vector-illustration.jpg');
+                    break;
+                case '2':
+                    changeBackground('https://th.bing.com/th/id/R.435ebd9442f6ca449b44699a2a9a6acd?rik=fYMPzB%2ffp1EczA&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f1%2fa%2f8%2f136021.jpg&ehk=MAPonR9qka0eiZRvyC%2b08vGWIdpkEibRMFYdtK6xt8c%3d&risl=&pid=ImgRaw&r=0');
+                    break;
+                case '3':
+                    changeBackground('https://www.teahub.io/photos/full/44-440307_light-colors-geometric-pattern-abstract-wallpaper-abstract-wallpaper.jpg');
+                    break;
+                case '4':
+                    changeBackground('https://img.freepik.com/free-photo/soft-vintage-gradient-blur-background-with-pastel-colored-well-use-as-studio-room-product-presentation-banner_1258-71429.jpg');
+                    break;
+                case '5':
+                    changeBackground('https://static.vecteezy.com/system/resources/thumbnails/008/058/793/small_2x/abstract-blur-with-bokeh-light-for-background-usage-vector.jpg');
+                    break;
+                case '6':
+                    changeBackground('https://getwallpapers.com/wallpaper/full/e/c/e/455056.jpg');
+                default:
+                    break;
+            }
+        });
+    });
+
+document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('uploadButton').addEventListener('click', () => {
         const imageInput = document.getElementById('imageInput');
         if (imageInput.files.length === 0) {
@@ -76,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       qrCodeElement.appendChild(qrImg);
       qrCodeElement.style.display = 'block';
 
-      // Hide the result and copy button
+
       document.getElementById('result').style.display = 'none';
       document.getElementById('copyButton').style.display = 'none';
     }
@@ -117,4 +152,6 @@ document.getElementById('dropArea').addEventListener('drop', (event) => {
         document.getElementById('dropArea').classList.add('active');
         document.getElementById('dropArea').innerText = `File selected: ${files[0].name}`;
     }
+});
+
 });
