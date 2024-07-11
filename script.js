@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    // Function to change background image based on selection
     function changeBackground(imageUrl) {
         document.body.style.backgroundImage = `url('${imageUrl}')`;
     }
 
-
+    // Event listener for background selection
     const backgroundRadios = document.querySelectorAll('#backgroundSelection input[type="radio"]');
     backgroundRadios.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       qrCodeElement.appendChild(qrImg);
       qrCodeElement.style.display = 'block';
 
-
+      // Hide the result and copy button
       document.getElementById('result').style.display = 'none';
       document.getElementById('copyButton').style.display = 'none';
     }
