@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Function to change background image based on selection
+
     function changeBackground(imageUrl) {
         document.body.style.backgroundImage = `url('${imageUrl}')`;
     }
 
-    // Event listener for background selection
+
     const backgroundRadios = document.querySelectorAll('#backgroundSelection input[type="radio"]');
     backgroundRadios.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event listener for upload button
+
     document.getElementById('uploadButton').addEventListener('click', () => {
         const imageInput = document.getElementById('imageInput');
         if (imageInput.files.length === 0) {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Function to show result
+
     function showResult(url1, url2) {
         const qrCodeElement = document.getElementById('qrCode');
         qrCodeElement.innerHTML = ''; // Clear previous QR code if any
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Function to shorten URL with tinyurl
+
     function shortenUrlTiny(imgurUrl) {
         fetch(`https://api.tinyurl.com/create?url=${encodeURIComponent(imgurUrl)}`, {
             method: 'POST',
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to generate QR code
+
     function generateQRCode(url) {
         const qrCodeElement = document.getElementById('qrCode');
         qrCodeElement.innerHTML = ''; // Clear previous QR code if any
@@ -165,13 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
         qrCodeElement.appendChild(qrImg);
         qrCodeElement.style.display = 'block';
 
-        // Hide the result and copy buttons
+
         document.getElementById('result').style.display = 'none';
         document.getElementById('copyTinyButton').style.display = 'none';
         document.getElementById('copyIsGdButton').style.display = 'none';
     }
 
-    // Function to copy text to clipboard
+
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text)
             .then(() => {
@@ -182,15 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Additional event listeners and setup can go here if needed
+
 });
 
-// Event listener for file input selection via drop area
+
 document.getElementById('dropArea').addEventListener('click', () => {
     document.getElementById('imageInput').click();
 });
 
-// Event listener for file input change
+
 document.getElementById('imageInput').addEventListener('change', (event) => {
     const files = event.target.files;
     if (files.length > 0) {
@@ -199,7 +199,7 @@ document.getElementById('imageInput').addEventListener('change', (event) => {
     }
 });
 
-// Event listeners for drag and drop functionality
+
 document.getElementById('dropArea').addEventListener('dragover', (event) => {
     event.preventDefault();
     document.getElementById('dropArea').classList.add('hover');
