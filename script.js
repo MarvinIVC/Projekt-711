@@ -35,6 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const toggleButton = document.getElementById('toggleBackgrounds');
+    const backgroundSelection = document.getElementById('backgroundSelection');
+
+    toggleButton.addEventListener('click', () => {
+        if (backgroundSelection.classList.contains('visible')) {
+            backgroundSelection.classList.remove('visible');
+            setTimeout(() => {
+                backgroundSelection.style.display = 'none';
+            }, 500); // Match the transition duration
+        } else {
+            backgroundSelection.style.display = 'flex';
+            setTimeout(() => {
+                backgroundSelection.classList.add('visible');
+            }, 0); // Delay to trigger the transition
+        }
+    });
+
 
     document.getElementById('uploadButton').addEventListener('click', () => {
         const imageInput = document.getElementById('imageInput');
@@ -44,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const imageFile = imageInput.files[0];
-        const imgurClientId = 'feaa817d1a27759'; 
+        const imgurClientId = 'feaa817d1a27759';
 
         const formDataImgur = new FormData();
         formDataImgur.append('image', imageFile);
@@ -60,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.success) {
                 const imgurUrl = data.data.link;
-                document.getElementById('linkOptions').style.display = 'flex'; 
+                document.getElementById('linkOptions').style.display = 'flex';
                 document.getElementById('getLink').onclick = () => {
                     shortenUrlTiny(imgurUrl); // Default to tinyurl
                     shortenUrlIsGd(imgurUrl); // Also shorten with is.gd
@@ -83,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showResult(url1, url2) {
         const qrCodeElement = document.getElementById('qrCode');
-        qrCodeElement.innerHTML = ''; 
+        qrCodeElement.innerHTML = '';
         qrCodeElement.style.display = 'none';
 
         const resultElement = document.getElementById('result');
@@ -114,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O' 
+                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O'
             },
             body: JSON.stringify({
                 url: imgurUrl
