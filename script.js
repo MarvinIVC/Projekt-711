@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const imgurUrl = data.data.link;
                 document.getElementById('linkOptions').style.display = 'flex';
                 document.getElementById('getLink').onclick = () => {
-                    shortenUrlTiny(imgurUrl); // Default to tinyurl
-                    shortenUrlIsGd(imgurUrl); // Also shorten with is.gd
+                    shortenUrlTiny(imgurUrl);
+                    shortenUrlIsGd(imgurUrl); 
                 };
                 document.getElementById('generateQRCodeButton').onclick = () => {
                     generateQRCode(imgurUrl);
