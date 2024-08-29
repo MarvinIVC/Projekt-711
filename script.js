@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const imageFile = imageInput.files[0];
-        const imgurClientId = 'feaa817d1a27759';
+
 
         const formDataImgur = new FormData();
         formDataImgur.append('image', imageFile);
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
+                'Authorization': 'Bearer Movmm1FfNvTgAj1CVW0b4QU8666jIPyVdkx6WhwfvhF4Irods5kW0Ym6Ps7O'
             },
             body: JSON.stringify({
                 url: imgurUrl
