@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const imageFile = imageInput.files[0];
-
+        const imgurClientId = 'feaa817d1a27759';
 
         const formDataImgur = new FormData();
         formDataImgur.append('image', imageFile);
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const imgurUrl = data.data.link;
                 document.getElementById('linkOptions').style.display = 'flex';
                 document.getElementById('getLink').onclick = () => {
-                    shortenUrlTiny(imgurUrl); 
-                    shortenUrlIsGd(imgurUrl); 
+                    shortenUrlTiny(imgurUrl); // Default to tinyurl
+                    shortenUrlIsGd(imgurUrl); // Also shorten with is.gd
                 };
                 document.getElementById('generateQRCodeButton').onclick = () => {
                     generateQRCode(imgurUrl);
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateQRCode(url) {
         const qrCodeElement = document.getElementById('qrCode');
-        qrCodeElement.innerHTML = ''; 
+        qrCodeElement.innerHTML = ''; // Clear previous QR code if any
 
         const qrImg = document.createElement('img');
         qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
